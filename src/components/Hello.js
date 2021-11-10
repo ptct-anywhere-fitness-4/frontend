@@ -6,7 +6,12 @@ const Hello = (props) => {
   return (
     <div>
       <h1>{props.something}</h1>
-      <button onClick={props.somethingRandom}>
+      <button
+        onClick={() => {
+          alert('something awesome');
+          props.somethingRandom();
+        }}
+      >
         Click me for something to happen
       </button>
     </div>
