@@ -1,28 +1,20 @@
-import Hello from './components/Hello';
+import About from './views/About';
+import Home from './views/Home';
 import { Link, Route, Routes } from 'react-router-dom';
+import Auth from './views/Auth';
 
 function App() {
   return (
     <div className='App'>
-      <div>
-        <Link to='something'>
-          <button class='text-center text-indigo-400 font-bold rounded py-2 w-2/12 focus:outline-none bg-gray-900 border-2 border-indigo-400'>
-            Go To Hello
-          </button>
-        </Link>
-        <br />
-        <Link to='/'>
-          <button class='text-center text-indigo-400 font-bold rounded py-2 w-2/12 focus:outline-none bg-gray-900 border-2 border-indigo-400'>
-            Go To Home
-          </button>
-        </Link>
-      </div>
+      <h1>yo</h1>
 
       {/* SWITCH has been replaced with ROUTES */}
       {/* COMPONENT replaced with ELEMENT */}
       {/* https://stackoverflow.com/questions/63124161/attempted-import-error-switch-is-not-exported-from-react-router-dom?rq=1 */}
       <Routes>
-        <Route exact path='/something' element={<Hello />} />
+        <Route exact path='/' element={<About />} />
+        <Route exact path='/home' element={<Home />} />
+        {/* this is the page shown after they are logged in */}
       </Routes>
     </div>
   );
