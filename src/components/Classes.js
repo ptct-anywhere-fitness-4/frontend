@@ -5,7 +5,7 @@ import Class from './Class';
 import React from 'react';
 
 export default function Classes() {
-  const classes = [class1, class2];
+  const classes = [{ class: 'good class' }, { class: 'class 2' }];
   // function JoinClass, pass it in as a prop in class
   // function editClass (if instructor), pass it in as a prop in class
   // class component has a bool isInstructor?, renders a different button depening on it
