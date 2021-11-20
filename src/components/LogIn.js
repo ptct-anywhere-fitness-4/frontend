@@ -2,16 +2,17 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import { LockClosedIcon } from '@heroicons/react/solid';
+import { setLoggedIn } from '../actions';
 
 const initialData = {
   username: "", 
   password: "",
 };
 
-const LogIn = () => {
+const LogIn = ({ setLoggedIn }) => {
 //export default function LogIn() {
   //return <div>ME LOGIN COMPONENT</div>;
-  //?? Not sure what's wrong with my state
+ 
   const [data, setInitialData] = useState(initialData);
 
   const handleChanges = (e) => {
@@ -123,14 +124,16 @@ const LogIn = () => {
     </>
   );
 
-   const mapStateToProps = (state) => {
-     return {};
-   }
-}
-//?? not sure why mapStateToProps won't work yet??
+};
 
-//export default connect(mapStateToProps(LogIn));
-export default LogIn;
+const mapStateToProps = (state) => {
+  return {};
+}
+
+
+
+export default connect(mapStateToProps, {setLoggedIn})(LogIn);
+//export default LogIn;
 /* 
 username
 password
