@@ -1,127 +1,101 @@
-import React from 'react';
-import { LockClosedIcon } from '@heroicons/react/solid';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
+const initialFormValues = {
+  username: '',
+  password: '',
+  instructorPassword: '',
+};
 
-export default function Register() {
-  //return (
-   <div>ME REGISTER COMPONENT</div>;
-   return (
-  <>
-  <div className='flex items-center justify-center min-h-full px-4 py-12 sm:px-6 lg:px-8'>
-       <div className='w-full max-w-md space-y-8'>
-         <div>
-           <img
-             className='w-auto h-12 mx-auto'
-             src='https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg'
-             alt='Workflow'
-           />
-           <h2 className='mt-6 text-3xl font-extrabold text-center text-gray-900'>
-             Register
-           </h2>
-           <p className='mt-2 text-sm text-center text-gray-600'>
-             Or{' '}
-             <a
-               href='#'
-               className='font-medium text-indigo-600 hover:text-indigo-500'
-             >
-               start your 14-day free trial
-             </a>
-           </p>
-         </div>
+export default function Register(props) {
+  const [formValues, setFormValues] = useState(initialFormValues);
+  const { push } = useNavigate();
 
-         <form className='mt-8 space-y-6' action='#' method='POST'>
-           <input type='hidden' name='remember' defaultValue='true' />
-           <div className='-space-y-px rounded-md shadow-sm'>
-           
-           <div>
-               <label htmlFor='email-address' className='sr-only'>
-                 Username
-               </label>
-               <input
-                 id='email-address'
-                 name='username'
-                 type='username'
-                 autoComplete='email'
-                 required
-                 className='relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm'
-                 placeholder='Username'
-               />
-             </div>
-             
-             <div>
-               <label htmlFor='email-address' className='sr-only'>
-                 Email address
-               </label>
-               <input
-                 id='email-address'
-                 name='email'
-                 type='email'
-                 autoComplete='email'
-                 required
-                 className='relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm'
-                 placeholder='Email address'
-               />
-             </div>
+  const onChange = (e) => {
+    setFormValues({ ...formValues, [e.target.name]: e.target.value });
+  };
 
-             <div>
-               <label htmlFor='password' className='sr-only'>
-                 Password
-               </label>
-               <input
-                 id='password'
-                 name='password'
-                 type='password'
-                 autoComplete='current-password'
-                 required
-                 className='relative block w-full px-3 py-2 text-gray-900 placeholder-gray-500 border border-gray-300 rounded-none appearance-none rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm'
-                 placeholder='Password'
-               />
-             </div>
-           </div>
-           <div className='flex items-center justify-between'>
-             <div className='flex items-center'>
-               <input
-                 id='remember-me'
-                 name='remember-me'
-                 type='checkbox'
-                 className='w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500'
-               />
-               <label
-                 htmlFor='remember-me'
-                 className='block ml-2 text-sm text-gray-900'
-               >
-                 Remember me
-               </label>
-             </div>
-             <div className='text-sm'>
-               <a
-                 href='#'
-                 className='font-medium text-indigo-600 hover:text-indigo-500'
-               >
-                 Forgot your password?
-               </a>
-             </div>
-           </div>
-           <div>
-             <button
-               type='submit'
-               className='relative flex justify-center w-full px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md group hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
-             >
-               <span className='absolute inset-y-0 left-0 flex items-center pl-3'>
-                 <LockClosedIcon
-                   className='w-5 h-5 text-indigo-500 group-hover:text-indigo-400'
-                   aria-hidden='true'
-                 />
-               </span>
-               Register
-             </button>
-           </div>
-         </form>
-       </div>
-     </div>
-   </>
- );
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    await props.addUser(formValues);
+    push('/home');
+  };
+  return (
+    <div>
+      <form onSubmit={onSubmit} className='space-y-6'>
+        <div>
+          <label
+            htmlFor='username'
+            className='block text-sm font-medium text-gray-700'
+          >
+            Username
+          </label>
+          <div className='mt-1'>
+            <input
+              id='username'
+              value={formValues.username}
+              name='username'
+              type='username'
+              autoComplete='username'
+              required
+              onChange={onChange}
+              className='block w-full px-3 py-2 placeholder-gray-400 border border-gray-300 rounded-md shadow-sm appearance-none focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'
+            />
+          </div>
+        </div>
 
+        <div>
+          <label
+            htmlFor='password'
+            className='block text-sm font-medium text-gray-700'
+          >
+            Password
+          </label>
+          <div className='mt-1'>
+            <input
+              id='password'
+              value={formValues.password}
+              name='password'
+              type='password'
+              autoComplete='current-password'
+              required
+              onChange={onChange}
+              className='block w-full px-3 py-2 placeholder-gray-400 border border-gray-300 rounded-md shadow-sm appearance-none focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'
+            />
+          </div>
+        </div>
+
+        <div>
+          <label
+            htmlFor='instructorPassword'
+            className='block text-sm font-medium text-gray-700'
+          >
+            Secret Code
+          </label>
+          <div className='mt-1'>
+            <input
+              id='instructorPassword'
+              value={formValues.number}
+              name='instructorPassword'
+              type='password'
+              placeholder=''
+              onChange={onChange}
+              className='block w-full px-3 py-2 placeholder-gray-400 border border-gray-300 rounded-md shadow-sm appearance-none focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'
+            />
+          </div>
+        </div>
+
+        <div>
+          <button
+            type='submit'
+            className='flex justify-center w-full px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
+          >
+            Sign Up
+          </button>
+        </div>
+      </form>
+    </div>
+  );
 }
 
 /* 
