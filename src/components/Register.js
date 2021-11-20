@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 const initialFormValues = {
@@ -7,7 +8,8 @@ const initialFormValues = {
   instructorPassword: '',
 };
 
-export default function Register(props) {
+function Register(props) {
+  console.log(props);
   const [formValues, setFormValues] = useState(initialFormValues);
   const { push } = useNavigate();
 
@@ -97,6 +99,12 @@ export default function Register(props) {
     </div>
   );
 }
+
+const mapStateToProps = (state) => {
+  return {};
+};
+
+export default connect(mapStateToProps, {})(Register);
 
 /* 
 username
