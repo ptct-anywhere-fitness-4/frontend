@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+
 import { registerUser } from '../actions';
 
 const initialFormValues = {
@@ -11,8 +11,7 @@ const initialFormValues = {
 
 function Register(props) {
   const [formValues, setFormValues] = useState(initialFormValues);
-  const { push } = useNavigate();
-
+  // console.log(useLocation());
   const onChange = (e) => {
     setFormValues({ ...formValues, [e.target.name]: e.target.value });
   };
@@ -20,7 +19,7 @@ function Register(props) {
   const onSubmit = async (e) => {
     e.preventDefault();
     await props.registerUser(formValues);
-    // push('/home');
+    window.location.href = '/home';
   };
   return (
     <div>
