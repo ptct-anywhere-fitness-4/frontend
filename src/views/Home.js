@@ -1,5 +1,6 @@
 import React from 'react';
 import Classes from '../components/Classes';
+import NavBar from '../components/NavBar';
 
 // localhost:5000/home
 
@@ -7,6 +8,7 @@ import Classes from '../components/Classes';
 export default function Home() {
   return (
     <div>
+      <NavBar />
       <Classes />
     </div>
   );

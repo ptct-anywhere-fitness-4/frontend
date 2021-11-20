@@ -17,11 +17,11 @@ function Register(props) {
   const onSubmit = async (e) => {
     e.preventDefault();
     await props.registerUser(formValues);
-    if (props.isInstructor === undefined) {
-      alert('error logging in');
-    } else {
-      window.location.href = '/home';
-    }
+    // if (props.isInstructor === undefined) {
+    // alert('error logging in');
+    // } else {
+    window.location.href = '/home';
+    // }
   };
   return (
     <div>

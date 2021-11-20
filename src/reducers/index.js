@@ -1,7 +1,7 @@
 import { applyMiddleware, createStore } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
-import { ERROR_HANDLER, LOGGED_IN } from '../actions';
+import { ERROR_HANDLER, LOGGED_IN, LOGGED_OUT } from '../actions';
 
 const initialState = {
   user: {
@@ -23,6 +23,8 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         user: { ...state.user, ...action.payload },
       };
+    case LOGGED_OUT:
+      return initialState;
     default:
       return state;
   }

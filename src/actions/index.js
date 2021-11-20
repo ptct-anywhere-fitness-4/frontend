@@ -3,6 +3,7 @@ import axiosWithAuth from '../utils/axiosWithAuth';
 
 export const REGISTER_USER = 'REGISTER_USER';
 export const LOGIN_USER = 'LOGIN_USER';
+export const LOGOUT_USER = 'LOGOUT_USER';
 export const LOGGED_IN = 'SET_LOGGED_IN';
 export const LOGGED_OUT = 'SET_LOGGED_OUT';
 export const ERROR_HANDLER = 'ERROR_HANDLER';
@@ -31,4 +32,9 @@ export const registerUser = (userInfo) => async (dispatch) => {
   } catch (err) {
     dispatch({ type: ERROR_HANDLER, payload: err });
   }
+};
+
+export const logoutUser = () => {
+  localStorage.removeItem('token');
+  return { type: LOGGED_OUT };
 };
