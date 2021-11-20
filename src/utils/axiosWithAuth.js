@@ -7,7 +7,7 @@ const axiosWithAuth = () => {
     headers: {
       authorization: token,
     },
-    baseURL: 'https://bw-anywhere-fitness-backend.herokuapp.com/',
+    // baseURL: 'http://localhost:9000/api/',
   });
 };
 

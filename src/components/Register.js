@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { registerUser } from '../actions';
 
 const initialFormValues = {
   username: '',
@@ -9,7 +10,6 @@ const initialFormValues = {
 };
 
 function Register(props) {
-  console.log(props);
   const [formValues, setFormValues] = useState(initialFormValues);
   const { push } = useNavigate();
 
@@ -19,8 +19,8 @@ function Register(props) {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    await props.addUser(formValues);
-    push('/home');
+    await props.registerUser(formValues);
+    // push('/home');
   };
   return (
     <div>
@@ -104,7 +104,7 @@ const mapStateToProps = (state) => {
   return {};
 };
 
-export default connect(mapStateToProps, {})(Register);
+export default connect(mapStateToProps, { registerUser })(Register);
 
 /* 
 username

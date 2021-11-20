@@ -1,16 +1,29 @@
 import { applyMiddleware, createStore } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
-import { SOMETHING_RANDOM } from '../actions';
+import { ERROR_HANDLER, LOGGED_IN } from '../actions';
 
 const initialState = {
-  something: 'random',
+  user: {
+    username: '',
+    isAdmin: undefined,
+  },
+  error: '',
 };
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
-    case SOMETHING_RANDOM:
-      return { ...state, something: action.payload };
+    case ERROR_HANDLER:
+      console.log(action.payload.message);
+      return {
+        ...state,
+        error: action.payload.message,
+      };
+    case LOGGED_IN:
+      return {
+        ...state,
+        user: { ...state.user, ...action.payload },
+      };
     default:
       return state;
   }
