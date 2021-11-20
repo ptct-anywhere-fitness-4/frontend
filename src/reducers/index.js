@@ -6,7 +6,7 @@ import { ERROR_HANDLER, LOGGED_IN } from '../actions';
 const initialState = {
   user: {
     username: '',
-    isAdmin: undefined,
+    isInstructor: undefined,
   },
   error: '',
 };
@@ -14,7 +14,6 @@ const initialState = {
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
     case ERROR_HANDLER:
-      console.log(action.payload.message);
       return {
         ...state,
         error: action.payload.message,

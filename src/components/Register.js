@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-
 import { registerUser } from '../actions';
 
 const initialFormValues = {
@@ -11,7 +10,6 @@ const initialFormValues = {
 
 function Register(props) {
   const [formValues, setFormValues] = useState(initialFormValues);
-  // console.log(useLocation());
   const onChange = (e) => {
     setFormValues({ ...formValues, [e.target.name]: e.target.value });
   };
@@ -19,7 +17,11 @@ function Register(props) {
   const onSubmit = async (e) => {
     e.preventDefault();
     await props.registerUser(formValues);
-    window.location.href = '/home';
+    if (props.isInstructor === undefined) {
+      alert('error logging in');
+    } else {
+      window.location.href = '/home';
+    }
   };
   return (
     <div>
@@ -100,14 +102,7 @@ function Register(props) {
 }
 
 const mapStateToProps = (state) => {
-  return {};
+  return { isInstructor: state.user.isInstructor };
 };
 
 export default connect(mapStateToProps, { registerUser })(Register);
-
-/* 
-username
-password
-Auth Password (optional):
-  --> if they have the correct password, they will be registered as an instructor and not a student
-*/
