@@ -123,9 +123,9 @@ const LogIn = () => {
     </>
   );
 
-  const mapStateToProps = (state) => {
-    return {};
-  }
+   const mapStateToProps = (state) => {
+     return {};
+   }
 }
 //?? not sure why mapStateToProps won't work yet??
 
