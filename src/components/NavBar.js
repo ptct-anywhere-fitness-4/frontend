@@ -86,7 +86,6 @@ function Navbar(props) {
                               onClick={() => {
                                 logoutUser();
                                 navigate('/auth');
-                                console.log('Main menu one being clicked');
                               }}
                               className={classNames(
                                 active ? 'bg-gray-100' : '',
@@ -138,7 +137,6 @@ function Navbar(props) {
                 onClick={() => {
                   logoutUser();
                   navigate('/auth');
-                  console.log('I am navigaiting');
                 }}
                 className='mt-3 space-y-1'
               >
