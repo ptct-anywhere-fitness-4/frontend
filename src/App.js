@@ -19,8 +19,8 @@ function App() {
             </PrivateRoute>
           }
         />
-        <Route path='/auth' element={<Auth />} />
-        <Route path='/' element={<About />} />
+        {/* <Route path='/auth' element={<Auth />} /> */}
+        <Route path='/' element={<Auth />} />
       </Routes>
     </div>
   );

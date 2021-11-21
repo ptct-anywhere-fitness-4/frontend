@@ -13,7 +13,6 @@ export const ERROR_HANDLER = 'ERROR_HANDLER';
 
 export const registerUser = (userInfo) => async (dispatch) => {
   try {
-    // const createdUser = await axios.post('api/auth/register', userInfo);
     await axios.post('api/auth/register', userInfo);
     dispatch(loginUser(userInfo));
   } catch (err) {
