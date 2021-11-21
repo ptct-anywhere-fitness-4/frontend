@@ -1,13 +1,27 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import Class from './Class';
-import { grabClasses } from '../actions';
+import {
+  grabClasses,
+  grabClientRegisteredClasses,
+  registerClass,
+  unregisterClass,
+} from '../actions';
 
 function Classes(props) {
-  const { grabClasses, classes } = props;
+  const {
+    grabClasses,
+    grabClientRegisteredClasses,
+    registerClass,
+    classes,
+    user,
+    registeredClasses,
+    unregisterClass,
+  } = props;
 
   useEffect(() => {
     grabClasses();
+    grabClientRegisteredClasses(user.id);
   }, []);
 
   return (
@@ -35,7 +49,7 @@ function Classes(props) {
                       scope='col'
                       className='px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase'
                     >
-                      Duration
+                      Duration & Intensity
                     </th>
                     <th
                       scope='col'
@@ -54,6 +68,10 @@ function Classes(props) {
                       key={fitClassIdx}
                       fitClass={fitClass}
                       fitClassIdx={fitClassIdx}
+                      user={user}
+                      registerClass={registerClass}
+                      registeredClasses={registeredClasses}
+                      unregisterClass={unregisterClass}
                     />
                   ))}
                 </tbody>
@@ -67,6 +85,15 @@ function Classes(props) {
 }
 
 const mapStateToProps = (state) => {
-  return { classes: state.classes };
+  return {
+    classes: state.classes,
+    user: state.user,
+    registeredClasses: state.user.registeredClasses,
+  };
 };
-export default connect(mapStateToProps, { grabClasses })(Classes);
+export default connect(mapStateToProps, {
+  grabClasses,
+  registerClass,
+  grabClientRegisteredClasses,
+  unregisterClass,
+})(Classes);

@@ -4,15 +4,20 @@ import thunk from 'redux-thunk';
 import {
   ERROR_HANDLER,
   GRABBED_CLASSES,
+  GRABBED_CLIENT_REGISTERED_CLASSES,
   LOGGED_IN,
   LOGGED_OUT,
+  REGISTERED_CLASS,
+  UNREGISTERED_CLASS,
 } from '../actions';
 
 const initialState = {
   user: {
+    id: undefined,
     username: '',
     isInstructor: undefined,
     createdClassess: [],
+    registeredClasses: [],
   },
   classes: [],
   error: '',
@@ -21,6 +26,7 @@ const initialState = {
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
     case ERROR_HANDLER:
+      console.log(action.payload.message);
       return {
         ...state,
         error: action.payload.message,
@@ -37,6 +43,19 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         classes: action.payload,
       };
+    case REGISTERED_CLASS:
+      return state;
+    case GRABBED_CLIENT_REGISTERED_CLASSES:
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          registeredClasses: action.payload,
+        },
+      };
+    case UNREGISTERED_CLASS:
+      console.log(action.payload);
+      return state;
     default:
       return state;
   }
