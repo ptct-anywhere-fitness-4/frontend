@@ -1,6 +1,6 @@
 import axios from 'axios';
 import axiosWithAuth from '../utils/axiosWithAuth';
-axios.defaults.baseURL = 'http://localhost:9000/';
+axios.defaults.baseURL = 'https://bw-anywhere-fitness-backend.herokuapp.com/';
 
 // export const REGISTER_USER = 'REGISTER_USER';
 // export const LOGIN_USER = 'LOGIN_USER';
