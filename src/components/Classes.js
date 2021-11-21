@@ -10,22 +10,6 @@ function Classes(props) {
     grabClasses();
   }, []);
 
-  const people = [
-    {
-      name: 'Jane Cooper',
-      title: 'Regional Paradigm Technician',
-      role: 'Admin',
-      email: 'jane.cooper@example.com',
-    },
-    {
-      name: 'Cody Fisher',
-      title: 'Product Directives Officer',
-      role: 'Owner',
-      email: 'cody.fisher@example.com',
-    },
-    // More people...
-  ];
-
   return (
     <div className='flex flex-col'>
       <div className='-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8'>
@@ -65,14 +49,11 @@ function Classes(props) {
               </thead>
               <tbody>
                 {classes.map((fitClass, fitClassIdx) => (
-                  <tr
-                    key={fitClass.name}
-                    className={
-                      fitClassIdx % 2 === 0 ? 'bg-white' : 'bg-gray-50'
-                    }
-                  >
-                    <Class fitClass={fitClass} />
-                  </tr>
+                  <Class
+                    key={fitClassIdx}
+                    fitClass={fitClass}
+                    fitClassIdx={fitClassIdx}
+                  />
                 ))}
               </tbody>
             </table>
