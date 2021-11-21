@@ -1,21 +1,84 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import Class from './Class';
 import { grabClasses } from '../actions';
 
 function Classes(props) {
   const { grabClasses, classes } = props;
-  // function JoinClass, pass it in as a prop in class
-  // function editClass (if instructor), pass it in as a prop in class
-  // class component has a bool isInstructor?, renders a different button depening on it
+
   useEffect(() => {
     grabClasses();
   }, []);
+
+  const people = [
+    {
+      name: 'Jane Cooper',
+      title: 'Regional Paradigm Technician',
+      role: 'Admin',
+      email: 'jane.cooper@example.com',
+    },
+    {
+      name: 'Cody Fisher',
+      title: 'Product Directives Officer',
+      role: 'Owner',
+      email: 'cody.fisher@example.com',
+    },
+    // More people...
+  ];
+
   return (
-    <div>
-      {/* {classes.map((fitnessClass) => {
-        <Class class={fitnessClass} />;
-      })} */}
+    <div className='flex flex-col'>
+      <div className='-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8'>
+        <div className='inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8'>
+          <div className='overflow-hidden border-b border-gray-200 shadow sm:rounded-lg'>
+            <table className='min-w-full divide-y divide-gray-200'>
+              <thead className='bg-gray-50'>
+                <tr>
+                  <th
+                    scope='col'
+                    className='px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase'
+                  >
+                    Name
+                  </th>
+                  <th
+                    scope='col'
+                    className='px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase'
+                  >
+                    Title
+                  </th>
+                  <th
+                    scope='col'
+                    className='px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase'
+                  >
+                    Email
+                  </th>
+                  <th
+                    scope='col'
+                    className='px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase'
+                  >
+                    Role
+                  </th>
+                  <th scope='col' className='relative px-6 py-3'>
+                    <span className='sr-only'>Edit</span>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {classes.map((fitClass, fitClassIdx) => (
+                  <tr
+                    key={fitClass.name}
+                    className={
+                      fitClassIdx % 2 === 0 ? 'bg-white' : 'bg-gray-50'
+                    }
+                  >
+                    <Class fitClass={fitClass} />
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
