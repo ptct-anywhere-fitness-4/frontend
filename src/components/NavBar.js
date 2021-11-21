@@ -4,13 +4,17 @@ import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline';
 import { PlusSmIcon } from '@heroicons/react/solid';
 import { logoutUser } from '../actions';
+import { useNavigate } from 'react-router';
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
 
 function Navbar(props) {
-  // get an isInstructor variable
+  const { logoutUser } = props;
+  const { isInstructor, username } = props.user;
+  const navigate = useNavigate();
+
   return (
     <Disclosure as='nav' className='bg-white shadow'>
       {({ open }) => (
@@ -41,19 +45,21 @@ function Navbar(props) {
                 </div>
               </div>
               <div className='flex items-center'>
-                <div className='flex-shrink-0'>
-                  <button
-                    type='button'
-                    className='relative inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
-                  >
-                    <PlusSmIcon
-                      className='w-5 h-5 mr-2 -ml-1'
-                      aria-hidden='true'
-                    />
-                    {/* DO SOME TERNARY MAGIC HERE */}
-                    <span>New Job</span>
-                  </button>
-                </div>
+                {isInstructor && (
+                  <div className='flex-shrink-0'>
+                    <button
+                      type='button'
+                      className='relative inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
+                    >
+                      <PlusSmIcon
+                        className='w-5 h-5 mr-2 -ml-1'
+                        aria-hidden='true'
+                      />
+                      {/* DO SOME TERNARY MAGIC HERE */}
+                      <span>New Job</span>
+                    </button>
+                  </div>
+                )}
                 <div className='hidden md:ml-4 md:flex-shrink-0 md:flex md:items-center'>
                   {/* Profile dropdown */}
                   <Menu as='div' className='relative ml-3'>
@@ -79,15 +85,18 @@ function Navbar(props) {
                       <Menu.Items className='absolute right-0 w-48 py-1 mt-2 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none'>
                         <Menu.Item>
                           {({ active }) => (
-                            <a
-                              href='#'
+                            <p
+                              onClick={() => {
+                                logoutUser();
+                                navigate('/auth');
+                              }}
                               className={classNames(
                                 active ? 'bg-gray-100' : '',
                                 'block px-4 py-2 text-sm text-gray-700'
                               )}
                             >
                               Sign out
-                            </a>
+                            </p>
                           )}
                         </Menu.Item>
                       </Menu.Items>
@@ -120,10 +129,10 @@ function Navbar(props) {
                 </div>
                 <div className='ml-3'>
                   <div className='text-base font-medium text-gray-800'>
-                    PERSONS USERNAME{/* Tom Cook ma   */}
+                    {username}
                   </div>
                   <div className='text-sm font-medium text-gray-500'>
-                    ternary for instructor{/* tom@example.com */}
+                    {isInstructor ? 'Instructor' : 'Client'}
                   </div>
                 </div>
               </div>
@@ -131,8 +140,8 @@ function Navbar(props) {
                 <Disclosure.Button
                   className='block px-4 py-2 text-base font-medium text-gray-500 hover:text-gray-800 hover:bg-gray-100 sm:px-6'
                   onClick={() => {
-                    props.logoutUser();
-                    // localStorage.removeItem('token');
+                    logoutUser();
+                    navigate('/auth');
                   }}
                 >
                   Sign out
@@ -147,7 +156,7 @@ function Navbar(props) {
 }
 
 const mapStateToProps = (state) => {
-  return { state };
+  return { user: state.user };
 };
 
 export default connect(mapStateToProps, { logoutUser })(Navbar);

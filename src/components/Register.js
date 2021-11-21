@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { registerUser } from '../actions';
+import { useNavigate } from 'react-router';
 
 const initialFormValues = {
   username: '',
@@ -10,6 +11,7 @@ const initialFormValues = {
 
 function Register(props) {
   const [formValues, setFormValues] = useState(initialFormValues);
+  const navigate = useNavigate();
   const onChange = (e) => {
     setFormValues({ ...formValues, [e.target.name]: e.target.value });
   };
@@ -20,7 +22,7 @@ function Register(props) {
     // if (props.isInstructor === undefined) {
     // alert('error logging in');
     // } else {
-    window.location.href = '/home';
+    navigate('/home');
     // }
   };
   return (
