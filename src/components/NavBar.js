@@ -1,7 +1,7 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
-import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline';
+import { MenuIcon, XIcon } from '@heroicons/react/outline';
 import { PlusSmIcon } from '@heroicons/react/solid';
 import { logoutUser } from '../actions';
 import { useNavigate } from 'react-router';
@@ -36,12 +36,9 @@ function Navbar(props) {
 
                 <div className='hidden md:ml-6 md:flex md:space-x-8'>
                   {/* Current: "border-indigo-500 text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" */}
-                  <a
-                    href='#'
-                    className='inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-500 border-b-2 border-transparent hover:border-gray-300 hover:text-gray-700'
-                  >
+                  <p className='inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-500 border-b-2 border-transparent hover:border-gray-300 hover:text-gray-700'>
                     Home
-                  </a>
+                  </p>
                 </div>
               </div>
               <div className='flex items-center'>
@@ -89,6 +86,7 @@ function Navbar(props) {
                               onClick={() => {
                                 logoutUser();
                                 navigate('/auth');
+                                console.log('Main menu one being clicked');
                               }}
                               className={classNames(
                                 active ? 'bg-gray-100' : '',
@@ -136,14 +134,15 @@ function Navbar(props) {
                   </div>
                 </div>
               </div>
-              <div className='mt-3 space-y-1'>
-                <Disclosure.Button
-                  className='block px-4 py-2 text-base font-medium text-gray-500 hover:text-gray-800 hover:bg-gray-100 sm:px-6'
-                  onClick={() => {
-                    logoutUser();
-                    navigate('/auth');
-                  }}
-                >
+              <div
+                onClick={() => {
+                  logoutUser();
+                  navigate('/auth');
+                  console.log('I am navigaiting');
+                }}
+                className='mt-3 space-y-1'
+              >
+                <Disclosure.Button className='block px-4 py-2 text-base font-medium text-gray-500 hover:text-gray-800 hover:bg-gray-100 sm:px-6'>
                   Sign out
                 </Disclosure.Button>
               </div>

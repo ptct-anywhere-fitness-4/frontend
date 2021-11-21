@@ -1,13 +1,20 @@
 import { applyMiddleware, createStore } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
-import { ERROR_HANDLER, LOGGED_IN, LOGGED_OUT } from '../actions';
+import {
+  ERROR_HANDLER,
+  GRABBED_CLASSES,
+  LOGGED_IN,
+  LOGGED_OUT,
+} from '../actions';
 
 const initialState = {
   user: {
     username: '',
     isInstructor: undefined,
+    createdClassess: [],
   },
+  classes: [],
   error: '',
 };
 
@@ -25,6 +32,11 @@ const rootReducer = (state = initialState, action) => {
       };
     case LOGGED_OUT:
       return initialState;
+    case GRABBED_CLASSES:
+      return {
+        ...state,
+        classes: action.payload,
+      };
     default:
       return state;
   }
