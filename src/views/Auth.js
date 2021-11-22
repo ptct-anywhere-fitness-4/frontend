@@ -7,7 +7,7 @@ import LogIn from '../components/LogIn';
 // in case u need reference https://www.vagaro.com/Login.aspx?enc=OcSkgjY9W03cadswvmCRyTkpx5L/QVAs0PbyWAiM8aoOAWTpsNV4YlKvJadiR+hxiVJtWEXUB3UmfoLRCfE9eUeQ6MHAGyCumJK4cHcULMrIHl+h2thA1iloh5Rf3zbC
 
 export default function Auth(props) {
-  const [isNewUser, setIsNewUser] = useState(true);
+  const [isNewUser, setIsNewUser] = useState(false);
 
   return (
     <div className='flex flex-col justify-center min-h-screen py-12 bg-gray-50 sm:px-6 lg:px-8'>

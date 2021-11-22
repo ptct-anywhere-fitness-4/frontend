@@ -9,6 +9,7 @@ export const GRABBED_CLIENT_REGISTERED_CLASSES =
   'GRABBED_CLIENT_REGISTERED_CLASSES';
 export const REGISTERED_CLASS = 'REGISTERED_CLASS';
 export const UNREGISTERED_CLASS = 'UNREGISTERED_CLASS';
+export const CREATED_CLASS = 'CREATED_CLASS';
 export const ERROR_HANDLER = 'ERROR_HANDLER';
 
 export const registerUser = (userInfo) => async (dispatch) => {
@@ -91,6 +92,23 @@ export const unregisterClass = (clientId, classId) => async (dispatch) => {
     dispatch({
       type: ERROR_HANDLER,
       payload: { message: 'error unregistering user' },
+    });
+  }
+};
+
+export const createClass = (classInfo, instructor_id) => async (dispatch) => {
+  try {
+    console.log(classInfo);
+    const newClass = await axiosWithAuth().post(
+      `/api/instructor/class`,
+      classInfo
+    );
+    console.log(newClass);
+    debugger;
+  } catch (err) {
+    dispatch({
+      type: ERROR_HANDLER,
+      payload: { message: 'error creating class' },
     });
   }
 };

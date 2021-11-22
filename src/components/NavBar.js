@@ -43,7 +43,10 @@ function Navbar(props) {
               </div>
               <div className='flex items-center'>
                 {isInstructor && (
-                  <div className='flex-shrink-0'>
+                  <div
+                    onClick={() => navigate('/create-class')}
+                    className='flex-shrink-0'
+                  >
                     <button
                       type='button'
                       className='relative inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
@@ -52,8 +55,7 @@ function Navbar(props) {
                         className='w-5 h-5 mr-2 -ml-1'
                         aria-hidden='true'
                       />
-                      {/* DO SOME TERNARY MAGIC HERE */}
-                      <span>New Job</span>
+                      <span>New Class</span>
                     </button>
                   </div>
                 )}
@@ -85,7 +87,7 @@ function Navbar(props) {
                             <p
                               onClick={() => {
                                 logoutUser();
-                                navigate('/auth');
+                                navigate('/');
                               }}
                               className={classNames(
                                 active ? 'bg-gray-100' : '',
@@ -136,7 +138,7 @@ function Navbar(props) {
               <div
                 onClick={() => {
                   logoutUser();
-                  navigate('/auth');
+                  navigate('/');
                 }}
                 className='mt-3 space-y-1'
               >
