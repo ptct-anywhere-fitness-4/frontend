@@ -36,6 +36,7 @@ function CreateClass(props) {
     formValues.intensity_id = parseInt(formValues.intensity_id);
     formValues.location_id = parseInt(formValues.location_id);
     createClass(formValues, user.id);
+    navigate('/home');
   };
 
   return (
